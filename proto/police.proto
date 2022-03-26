@@ -1,0 +1,38 @@
+//tell the file that we will be using proto3 coding
+syntax = "proto3";
+
+//specify the options for the service
+option java_multiple_files = true;
+option java_package = "policeservice";
+option java_outer_classname = "police2ServiceImpl";
+
+//Specify the package
+package police;
+
+//specify the service and the RPC services allowed
+service police{
+    rpc contactPD(contactPDRequest) returns (PDResponse);
+    rpc emergencyPD(stream PDEmergency) returns (stream emergencyPDResponse);
+}
+
+//detail the requirements for the RPC service
+message contactPDRequest{
+    string text = 1;
+}
+message PDResponse{
+    string value = 1;
+}
+
+//detail the requirements for the RPC service
+message PDEmergency{
+    string name = 1;
+    string situation = 2;
+    string address = 3;
+    string priority = 4;
+}
+message emergencyPDResponse{
+    string name = 1;
+    string situation = 2;
+    string address = 3;
+    string priority = 4; 
+}

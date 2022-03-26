@@ -1,0 +1,35 @@
+//tell the file that we will be using proto3 coding
+syntax = "proto3";
+
+//specify the options for the service
+option java_multiple_files = true;
+option java_package = "medicalservice";
+option java_outer_classname = "medical2ServiceImpl";
+
+//Specify the package
+package medical;
+
+//specify the service and the RPC services allowed
+service medical{
+    rpc contactMed(contactMedical) returns (medicalResponse);
+    rpc emergencyDetail(stream medicalEmergency) returns (emergencyResponse);
+}
+
+//detail the requirements for the RPC service
+message contactMedical{
+    string text = 1;
+}
+message medicalResponse{
+    string value = 1;
+}
+
+//detail the requirements for the RPC service
+message medicalEmergency{
+    string text = 1;
+}
+message emergencyResponse{
+    string name = 1;
+    string injury = 2;
+    string address = 3;
+    string priority = 4; 
+}
