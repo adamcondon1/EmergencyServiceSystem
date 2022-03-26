@@ -1,0 +1,35 @@
+//tell the file that we will be using proto3 coding
+syntax = "proto3";
+
+//specify the options for the service
+option java_multiple_files = true;
+option java_package = "rescueservice";
+option java_outer_classname = "rescue2ServiceImpl";
+
+//Specify the package
+package rescue;
+
+//specify the service and the RPC services allowed
+service rescue{ 
+    rpc contactRescue(contactRescueRequest) returns (rescueResponse);
+    rpc emergencyRescue(rescueEmergency) returns (stream rescueResponseStream);
+}
+
+//detail the requirements for the RPC service
+message contactRescueRequest{
+    string text = 1;
+}
+message rescueResponse{
+    string value = 1;
+}
+
+//detail the requirements for the RPC service
+message rescueEmergency{
+    string name = 1;
+    string injury = 2;
+    string address = 3;
+    string priority = 4; 
+}
+message rescueResponseStream{
+    string text = 1;
+}
